@@ -1,0 +1,15 @@
+{
+  "name": "com.shinn.customtimeline",
+  "version": "0.0.1",
+  "displayName": "Shinn.CustomTimeline",
+  "description": "Support components: Text",
+  "unity": "2019.4",
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "dependencies": {},
+  "author": {
+    "name": "John Tsai",
+    "email": "shinn716@livemail.tw"
+  }
+}
