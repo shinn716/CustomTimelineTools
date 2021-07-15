@@ -9,12 +9,9 @@ public class CustomTimelineEventManagerEditor : Editor
 {
     public enum OPTIONS
     {
-        ON_START_Int,
-        ON_START_Float,
-        ON_START_String,
-        ON_END_Int,
-        ON_END_Float,
-        ON_END_String
+        Int,
+        Float,
+        String,
     }
 
     public OPTIONS op;
@@ -33,67 +30,47 @@ public class CustomTimelineEventManagerEditor : Editor
     private GUIContent label_onStartEvents_FLOAT;
     private GUIContent label_onStartEvents_STRING;
 
-    private GUIContent label_onEndEvents_INT;
-    private GUIContent label_onEndEvents_FLOAT;
-    private GUIContent label_onEndEvents_STRING;
-
     private bool m_start_INT = false;
     private bool m_start_FLOAT = false;
     private bool m_start_STRING = false;
-    private bool m_end_INT = false;
-    private bool m_end_FLOAT = false;
-    bool m_end_STRING = false;
 
-    public void OnEnable()
+    void OnEnable()
     {
         script = (CustomTimelineEventManager) target;
         onStartEvents_INT = serializedObject.FindProperty("onStartEvents_INT");
         onStartEvents_FLOAT = serializedObject.FindProperty("onStartEvents_FLOAT");
         onStartEvents_STRING = serializedObject.FindProperty("onStartEvents_STRING");
 
-        onEndEvents_INT = serializedObject.FindProperty("onEndEvents_INT");
-        onEndEvents_FLOAT = serializedObject.FindProperty("onEndEvents_FLOAT");
-        onEndEvents_STRING = serializedObject.FindProperty("onEndEvents_STRING");
-
         label_onStartEvents_INT = new GUIContent("onStartEvents_INT");
+        label_onStartEvents_FLOAT = new GUIContent("onStartEvents_FLOAT");
+        label_onStartEvents_STRING = new GUIContent("onStartEvents_STRING");
     }
-    
+
     public override void OnInspectorGUI()
     {
-        op = (OPTIONS) EditorGUILayout.EnumPopup("Types:", op);
+        serializedObject.Update();
+        m_start_INT = EditorPrefs.GetBool("m_start_INT");
+        m_start_FLOAT = EditorPrefs.GetBool("m_start_FLOAT");
+        m_start_STRING = EditorPrefs.GetBool("m_start_STRING");
+        
+        op = (OPTIONS)EditorGUILayout.EnumPopup("Types:", op);
         if (GUILayout.Button("Create UnityEvent"))
         {
             switch (op)
             {
-                case OPTIONS.ON_START_Int:
+                case OPTIONS.Int:
                     m_start_INT = true;
                     break;
-                case OPTIONS.ON_START_Float:
+                case OPTIONS.Float:
                     m_start_FLOAT = true;
                     break;
-                case OPTIONS.ON_START_String:
+                case OPTIONS.String:
                     m_start_STRING = true;
-                    break;
-                case OPTIONS.ON_END_Int:
-                    m_end_INT = true;
-                    break;
-                case OPTIONS.ON_END_Float:
-                    m_end_FLOAT = true;
-                    break;
-                case OPTIONS.ON_END_String:
-                    m_end_STRING = true;
                     break;
             }
         }
         EditorGUILayout.Space();
-
-        if (m_start_INT || m_start_FLOAT || m_start_STRING)
-        {
-            GUIStyle style = new GUIStyle();
-            style.fontStyle = FontStyle.Bold;
-            EditorGUILayout.LabelField("OnStart", style);
-        }
-
+        
         if (m_start_INT)
         {
             EditorGUILayout.PropertyField(onStartEvents_INT, label_onStartEvents_INT);
@@ -123,46 +100,12 @@ public class CustomTimelineEventManagerEditor : Editor
                 script.ClearOnStartEvents_STRING();
             }
         }
-        
-        EditorGUILayout.Space();
 
-        if (m_end_INT || m_end_FLOAT || m_end_STRING)
-        {
-            GUIStyle style = new GUIStyle();
-            style.fontStyle = FontStyle.Bold;
-            EditorGUILayout.LabelField("OnEnd", style);
-        }
 
-        if (m_end_INT)
-        {
-            EditorGUILayout.PropertyField(onEndEvents_INT, label_onEndEvents_INT);
-            if (GUILayout.Button("Remove"))
-            {
-                m_end_INT = false;
-                script.ClearOnEndEvents_INT();
-            }
-        }
+        EditorPrefs.SetBool("m_start_INT", m_start_INT);
+        EditorPrefs.SetBool("m_start_FLOAT", m_start_FLOAT);
+        EditorPrefs.SetBool("m_start_STRING", m_start_STRING);
 
-        if (m_end_FLOAT)
-        {
-            EditorGUILayout.PropertyField(onEndEvents_FLOAT, label_onEndEvents_FLOAT);
-            if (GUILayout.Button("Remove"))
-            {
-                m_end_FLOAT = false;
-                script.ClearOnEndEvents_FLOAT();
-            }
-        }
-
-        if (m_end_STRING)
-        {
-            EditorGUILayout.PropertyField(onEndEvents_STRING, label_onEndEvents_STRING);
-            if (GUILayout.Button("Remove"))
-            {
-                m_end_STRING = false;
-                script.ClearOnEndEvents_STRING();
-            }
-        }
-        
         serializedObject.ApplyModifiedProperties();
     }
 }

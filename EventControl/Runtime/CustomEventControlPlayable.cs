@@ -20,8 +20,8 @@ namespace Shinn.Timelinie
 
         public ParameterType parameterType = ParameterType.Int;
         public string input;
-        public bool onStartTrigger = true;
-        public bool onEndTrigger = false;
+        //public bool onStartTrigger = true;
+        //public bool onEndTrigger = false;
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
@@ -32,8 +32,8 @@ namespace Shinn.Timelinie
             selectClip.targetEventmanager = targetEventManager.Resolve(graph.GetResolver());
             selectClip.input = input;
             selectClip.type = parameterType;
-            selectClip.onStartTrigger = onStartTrigger;
-            selectClip.onEndTrigger = onEndTrigger;
+            //selectClip.onStartTrigger = onStartTrigger;
+            //selectClip.onEndTrigger = onEndTrigger;
             return playable;
         }
     }
