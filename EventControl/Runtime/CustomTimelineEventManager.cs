@@ -11,11 +11,7 @@ namespace Shinn.Timelinie
         [SerializeField] UnityEvent<int> onStartEvents_INT = new UnityEvent<int>();
         [SerializeField] UnityEvent<float> onStartEvents_FLOAT = new UnityEvent<float>();
         [SerializeField] UnityEvent<string> onStartEvents_STRING = new UnityEvent<string>();
-
-        [SerializeField] bool m_start_IN;
-        [SerializeField] bool m_start_FLOAT;
-        [SerializeField] bool m_start_STRING;
-
+        
         // Message method
         private void StartEvent(object[] objs)
         {

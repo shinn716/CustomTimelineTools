@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Events;
-using System;
 
 namespace Shinn.Timelinie
 {
@@ -12,25 +10,28 @@ namespace Shinn.Timelinie
         public GameObject targetEventmanager { get; set; }
         public CustomEventControlPlayable.ParameterType type { get; set; }
         public object input { get; set; }
-        //public bool onStartTrigger { get; set; }
-        //public bool onEndTrigger { get; set; }
+        public bool useClipDuring { get; set; }
 
         private bool startOnce = false;
 
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
-            //if (!onStartTrigger)
-            //    return;
-
-            if (input == null)
+            if (targetEventmanager == null)
                 return;
 
-            if (targetEventmanager != null && !startOnce)
+            if (startOnce)
+                return;
+
+            startOnce = true;
+            
+            if (useClipDuring)
             {
-                startOnce = true;
-                object[] inputObjs = { type, input };
-                targetEventmanager.SendMessage("StartEvent", inputObjs);
+                var value = (float) playable.GetDuration();
+                input = value;
             }
+
+            object[] inputObjs = { type, input };
+            targetEventmanager.SendMessage("StartEvent", inputObjs);
         }
 
         // On clip end

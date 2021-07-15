@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.Playables;
+using UnityEditor;
 
 namespace Shinn.Timelinie
 {
@@ -20,20 +21,23 @@ namespace Shinn.Timelinie
 
         public ParameterType parameterType = ParameterType.Int;
         public string input;
-        //public bool onStartTrigger = true;
-        //public bool onEndTrigger = false;
+
+        [Space]
+        public bool useClipDuring = false;
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
             var playable = ScriptPlayable<CustomEventClip>.Create(graph);
-
             var selectClip = playable.GetBehaviour();
 
             selectClip.targetEventmanager = targetEventManager.Resolve(graph.GetResolver());
             selectClip.input = input;
             selectClip.type = parameterType;
-            //selectClip.onStartTrigger = onStartTrigger;
-            //selectClip.onEndTrigger = onEndTrigger;
+            selectClip.useClipDuring = useClipDuring;
+
+            if (useClipDuring)
+                parameterType = ParameterType.Float;
+
             return playable;
         }
     }
