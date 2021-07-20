@@ -1,10 +1,12 @@
 {
-    "name": "NewAssembly",
+    "name": "com.CustomTimelineTools.editor",
     "rootNamespace": "",
     "references": [
-        "GUID:1d9ad8e012a0bba4ea836a277ebc4ed2"
+        "GUID:92267d87d90914febb0a246da5a6191e"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

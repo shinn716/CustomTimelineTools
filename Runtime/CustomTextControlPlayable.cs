@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
 
-namespace Shinn.Timelinie
+namespace Shinn.ShiTimelinie
 {
     public class CustomTextControlPlayable : PlayableAsset
     {
