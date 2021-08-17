@@ -110,7 +110,7 @@ public class CustomEventControlPlayableEditor : Editor
                     else
                         return (x.ReturnType == typeof(void)) && (x.GetParameters().Length == 0);
                 }).ToArray();
-
+        
         var callbackMethodsEnumarable = allMethods.Select(
         x => x.DeclaringType.ToString() + "." + x.Name);
         
@@ -122,7 +122,7 @@ public class CustomEventControlPlayableEditor : Editor
             var result = Regex.Match(m, lastTwoDotPattern, RegexOptions.RightToLeft);
             return result.Success ? result.Value : m;
         }).ToArray();
-
+        
         label = EditorGUILayout.Popup(label, callbackMethodNames, GUILayout.ExpandWidth(true));
         script.template.HandlerKey = callbackMethodNames[label];
 

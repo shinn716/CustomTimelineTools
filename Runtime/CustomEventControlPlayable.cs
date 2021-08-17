@@ -79,13 +79,13 @@ namespace Shinn.Timelinie
                     methodData.methodInfo.Invoke(methodData.behaviour, null);
                     break;
                 case ParameterType.Int:
-                    methodData.methodInfo.Invoke(methodData.behaviour, new[] { (object)input_int });
+                    methodData.methodInfo.Invoke(methodData.behaviour, new[] { (object) input_int });
                     break;
                 case ParameterType.Float:
-                    methodData.methodInfo.Invoke(methodData.behaviour, new[] { (object)input_float });
+                    methodData.methodInfo.Invoke(methodData.behaviour, new[] { (object) input_float });
                     break;
                 case ParameterType.String:
-                    methodData.methodInfo.Invoke(methodData.behaviour, new[] { (object)input_str });
+                    methodData.methodInfo.Invoke(methodData.behaviour, new[] { (object) input_str });
                     break;
             }
         }
@@ -95,14 +95,17 @@ namespace Shinn.Timelinie
             Behaviour targetBehaviour = null;
             string methodName = null;
             GetBehaviourAndMethod(methodKey, ref targetBehaviour, ref methodName);
-
+            
             if (targetBehaviour != null)
             {
+                bool withParameter = type == ParameterType.Void ? false : true;
+
                 //get the method info
                 var methodInfo = targetBehaviour
                     .GetType()
-                    .GetMethods(BindingFlags.Public)
-                    .FirstOrDefault(m => m.Name == methodName && m.ReturnType == typeof(void));
+                    .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                    .FirstOrDefault(m => m.Name == methodName && m.ReturnType == typeof(void) &&
+                                         m.GetParameters().Length == (withParameter ? 1 : 0));
                 return new MethodData(targetBehaviour, methodInfo);
             }
 
@@ -119,7 +122,7 @@ namespace Shinn.Timelinie
                 string typeName = key.Substring(0, splitIndex);
 
                 methodName = key.Substring(splitIndex + 1, key.Length - (splitIndex + 1));
-
+                
                 if (string.IsNullOrEmpty(typeName) || string.IsNullOrEmpty(methodName))
                     throw new Exception("Unable to parse callback method: " + key);
 
@@ -132,10 +135,7 @@ namespace Shinn.Timelinie
                 {
                     var n_s = behaviour.GetType().ToString();
                     string[] splitArray = n_s.Split(char.Parse("."));
-
-                    Debug.Log(n_s);
-                    Debug.Log(splitArray[splitArray.Length - 1]);
-
+                    
                     if (typeName == splitArray[splitArray.Length - 1])
                     {
                         targetBehaviour = behaviour;
