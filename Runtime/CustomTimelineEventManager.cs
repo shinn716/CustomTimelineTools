@@ -8,9 +8,9 @@ namespace Shinn.Timelinie
 {
     public class CustomTimelineEventManager : MonoBehaviour
     {
-        [SerializeField] UnityEvent<int> onStartEvents_INT = new UnityEvent<int>();
-        [SerializeField] UnityEvent<float> onStartEvents_FLOAT = new UnityEvent<float>();
-        [SerializeField] UnityEvent<string> onStartEvents_STRING = new UnityEvent<string>();
+        [SerializeField] Events.IntEvent intEvents;
+        [SerializeField] Events.FloatEvent floatEvents;
+        [SerializeField] Events.StringEvent stringEvents;
         
         // Message method
         private void StartEvent(object[] objs)
@@ -21,17 +21,17 @@ namespace Shinn.Timelinie
         // public 
         public void ClearOnStartEvents_INT()
         {
-            onStartEvents_INT = new UnityEvent<int>();
+            intEvents = new Events.IntEvent();
         }
 
         public void ClearOnStartEvents_FLOAT()
         {
-            onStartEvents_FLOAT = new UnityEvent<float>();
+            floatEvents = new Events.FloatEvent();
         }
 
         public void ClearOnStartEvents_STRING()
         {
-            onStartEvents_STRING = new UnityEvent<string>();
+            stringEvents = new Events.StringEvent();
         }
 
         // Private
@@ -40,13 +40,13 @@ namespace Shinn.Timelinie
             switch (type.ToString())
             {
                 default:
-                    onStartEvents_STRING.Invoke(input.ToString());
+                    stringEvents.Invoke(input.ToString());
                     break;
                 case "Int":
-                    onStartEvents_INT.Invoke(int.Parse(input.ToString()));
+                    intEvents.Invoke(int.Parse(input.ToString()));
                     break;
                 case "Float":
-                    onStartEvents_FLOAT.Invoke(float.Parse(input.ToString()));
+                    floatEvents.Invoke(float.Parse(input.ToString()));
                     break;
             }
         }

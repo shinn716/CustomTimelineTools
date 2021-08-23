@@ -37,13 +37,13 @@ public class CustomTimelineEventManagerEditor : Editor
     void OnEnable()
     {
         script = (CustomTimelineEventManager) target;
-        onStartEvents_INT = serializedObject.FindProperty("onStartEvents_INT");
-        onStartEvents_FLOAT = serializedObject.FindProperty("onStartEvents_FLOAT");
-        onStartEvents_STRING = serializedObject.FindProperty("onStartEvents_STRING");
+        onStartEvents_INT = serializedObject.FindProperty("intEvents");
+        onStartEvents_FLOAT = serializedObject.FindProperty("floatEvents");
+        onStartEvents_STRING = serializedObject.FindProperty("stringEvents");
 
-        label_onStartEvents_INT = new GUIContent("onStartEvents_INT");
-        label_onStartEvents_FLOAT = new GUIContent("onStartEvents_FLOAT");
-        label_onStartEvents_STRING = new GUIContent("onStartEvents_STRING");
+        label_onStartEvents_INT = new GUIContent("intEvents");
+        label_onStartEvents_FLOAT = new GUIContent("floatEvents");
+        label_onStartEvents_STRING = new GUIContent("stringEvents");
     }
 
     public override void OnInspectorGUI()
