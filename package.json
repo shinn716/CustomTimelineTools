@@ -1,6 +1,6 @@
 {
   "name": "com.shinn.customtimeline",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "displayName": "Shinn.customTimeline",
   "description": "Support components: Text, Custom-Event",
   "unity": "2020.3",
@@ -11,5 +11,11 @@
   "author": {
     "name": "John Tsai",
     "email": "shinn716@livemail.tw"
+  },
+  "samples": [
+  {
+    "displayName": "Tantawowa.TimelineEvents",
+    "path": "Tantawowa.TimelineEvents~"
   }
+  ]
 }

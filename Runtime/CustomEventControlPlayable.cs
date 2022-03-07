@@ -31,6 +31,7 @@ namespace Shinn.Timelinie
 
         public enum ParameterType
         {
+            Null,
             Void,
             Int,
             Float,
@@ -76,6 +77,8 @@ namespace Shinn.Timelinie
             switch (type)
             {
                 default:
+                    break;
+                case ParameterType.Void:
                     methodData.methodInfo.Invoke(methodData.behaviour, null);
                     break;
                 case ParameterType.Int:

@@ -13,6 +13,7 @@ public class CustomEventControlPlayableEditor : Editor
 {
     public enum Options
     {
+        Null,
         Void,
         Parameter_Int,
         Parameter_Float,
@@ -57,6 +58,9 @@ public class CustomEventControlPlayableEditor : Editor
         switch (EditorPrefs.GetString("options"))
         {
             default:
+                options = Options.Null;
+                break;
+            case "Void":
                 options = Options.Void;
                 break;
             case "Parameter_Int":
@@ -75,6 +79,9 @@ public class CustomEventControlPlayableEditor : Editor
         switch (options)
         {
             default:
+                script.template.type = CustomEventControlPlayable.ParameterType.Null;
+                break;
+            case Options.Void:
                 script.template.type = CustomEventControlPlayable.ParameterType.Void;
                 break;
             case Options.Parameter_Int:
@@ -86,6 +93,15 @@ public class CustomEventControlPlayableEditor : Editor
             case Options.Parameter_Float:
                 script.template.type = CustomEventControlPlayable.ParameterType.Float;
                 break;
+        }
+
+        if (options == Options.Null)
+        {
+            label = 0;
+            EditorPrefs.SetString("options", options.ToString());
+            EditorPrefs.SetInt("label", label);
+            serializedObject.ApplyModifiedProperties();
+            return;
         }
 
         // Experiment
@@ -110,10 +126,10 @@ public class CustomEventControlPlayableEditor : Editor
                     else
                         return (x.ReturnType == typeof(void)) && (x.GetParameters().Length == 0);
                 }).ToArray();
-        
+
         var callbackMethodsEnumarable = allMethods.Select(
         x => x.DeclaringType.ToString() + "." + x.Name);
-        
+
         string[] callbackMethods = _eventHandlerListStart.Concat(callbackMethodsEnumarable).ToArray();
         var lastTwoDotPattern = @"[^\.]+\.[^\.]+$";
 
@@ -122,9 +138,17 @@ public class CustomEventControlPlayableEditor : Editor
             var result = Regex.Match(m, lastTwoDotPattern, RegexOptions.RightToLeft);
             return result.Success ? result.Value : m;
         }).ToArray();
-        
+
         label = EditorGUILayout.Popup(label, callbackMethodNames, GUILayout.ExpandWidth(true));
-        script.template.HandlerKey = callbackMethodNames[label];
+
+        try
+        {
+            script.template.HandlerKey = callbackMethodNames[label];
+        }
+        catch (Exception e)
+        {
+            label = 0;
+        }
 
         EditorGUILayout.Space();
 

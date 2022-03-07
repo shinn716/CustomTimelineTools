@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
 
-namespace Shinn.ShiTimelinie
+namespace Shinn.Timelinie
 {
     public class CustomTextClip : PlayableBehaviour
     {

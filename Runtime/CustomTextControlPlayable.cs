@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
 
-namespace Shinn.ShiTimelinie
+namespace Shinn.Timelinie
 {
     public class CustomTextControlPlayable : PlayableAsset
     {
@@ -14,7 +14,7 @@ namespace Shinn.ShiTimelinie
         public string txtContent;
 
         [Space]
-        public bool useOriginConfig = true;
+        public bool useComponentParameter = true;
         public Color txtColor = Color.black;
         public int txtSzie = 14;
 
@@ -25,7 +25,7 @@ namespace Shinn.ShiTimelinie
 
             selectClip.targetTxt = targetTxt.Resolve(graph.GetResolver());
             selectClip.txtContent = txtContent;
-            selectClip.useOriginConfig = useOriginConfig;
+            selectClip.useOriginConfig = useComponentParameter;
             selectClip.txtColor = txtColor;
             selectClip.txtSzie = txtSzie;
 
