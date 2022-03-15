@@ -1,6 +1,6 @@
 {
   "name": "com.shinn.timeline",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "shinn.timeline",
   "description": "Support components: Text, Custom-Event",
   "unity": "2020.3",
