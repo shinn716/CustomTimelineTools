@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5791352817534964278}
   - component: {fileID: 5791352817534964279}
   m_Layer: 0
-  m_Name: CustomTimelineEventManager
+  m_Name: CustomMsgEventManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

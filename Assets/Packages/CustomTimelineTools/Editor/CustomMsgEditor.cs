@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using Shinn.Timelinie;
 
-[CustomEditor(typeof(CustomTimelineEventManager)), CanEditMultipleObjects]
-public class CustomTimelineEventManagerEditor : Editor
+[CustomEditor(typeof(CustomMsgEventManager)), CanEditMultipleObjects]
+public class CustomMsgEditor : Editor
 {
     public enum OPTIONS
     {
@@ -16,7 +16,7 @@ public class CustomTimelineEventManagerEditor : Editor
 
     public OPTIONS op;
 
-    private CustomTimelineEventManager script;
+    private CustomMsgEventManager script;
 
     private SerializedProperty onStartEvents_INT;
     private SerializedProperty onStartEvents_FLOAT;
@@ -36,7 +36,7 @@ public class CustomTimelineEventManagerEditor : Editor
 
     void OnEnable()
     {
-        script = (CustomTimelineEventManager) target;
+        script = (CustomMsgEventManager) target;
         onStartEvents_INT = serializedObject.FindProperty("intEvents");
         onStartEvents_FLOAT = serializedObject.FindProperty("floatEvents");
         onStartEvents_STRING = serializedObject.FindProperty("stringEvents");

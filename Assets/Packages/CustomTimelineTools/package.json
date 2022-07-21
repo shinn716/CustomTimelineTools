@@ -2,7 +2,7 @@
   "name": "com.shinn.timeline",
   "version": "1.0.0",
   "displayName": "shinn.timeline",
-  "description": "Support components: Text, Custom-Event, Custom-MSG",
+  "description": "Support components: Custom-Text, Custom-Event, Custom-MSG",
   "unity": "2020.3",
   "documentationUrl": "",
   "changelogUrl": "",

@@ -7,11 +7,11 @@ using UnityEngine.Events;
 namespace Shinn.Timelinie
 {
     [ExecuteInEditMode]
-    public class CustomTimelineEventManager : MonoBehaviour
+    public class CustomMsgEventManager : MonoBehaviour
     {
-        [SerializeField] Events.IntEvent intEvents;
-        [SerializeField] Events.FloatEvent floatEvents;
-        [SerializeField] Events.StringEvent stringEvents;
+        [SerializeField] IntEvent intEvents;
+        [SerializeField] FloatEvent floatEvents;
+        [SerializeField] StringEvent stringEvents;
         
         // Message method
         private void StartEvent(object[] objs)
@@ -22,17 +22,17 @@ namespace Shinn.Timelinie
         // public 
         public void ClearOnStartEvents_INT()
         {
-            intEvents = new Events.IntEvent();
+            intEvents = new IntEvent();
         }
 
         public void ClearOnStartEvents_FLOAT()
         {
-            floatEvents = new Events.FloatEvent();
+            floatEvents = new FloatEvent();
         }
 
         public void ClearOnStartEvents_STRING()
         {
-            stringEvents = new Events.StringEvent();
+            stringEvents = new StringEvent();
         }
 
         // Private
