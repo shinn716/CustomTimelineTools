@@ -1,7 +1,7 @@
 # CustomTimelineTools
 Support: Text/Custom-event  
 ```
-https://github.com/shinn716/CustomTimelineTools.git#package
+https://github.com/shinn716/CustomTimelineTools.git?path=Assets/Packages/ShinnUtils
 ``` 
   
 ## Custom Text playable asset
