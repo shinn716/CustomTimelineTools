@@ -1,5 +1,6 @@
 # CustomTimelineTools
-Support: Text/Custom-event  
+Timeline Playable, Support: Custom-Text/Event/Message  
+
 ```
 https://github.com/shinn716/CustomTimelineTools.git?path=Assets/Packages/CustomTimelineTools
 ``` 
