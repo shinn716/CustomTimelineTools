@@ -3,6 +3,9 @@ Support: Text/Custom-event
 ```
 https://github.com/shinn716/CustomTimelineTools.git?path=Assets/Packages/CustomTimelineTools
 ``` 
+
+<img src="https://github.com/shinn716/CustomTimelineTools/blob/main/imgs/tutorial.gif" width="70%"/></a>  
+
   
 ## Custom Text playable asset
 * Step 1: Add text playable asset.  
