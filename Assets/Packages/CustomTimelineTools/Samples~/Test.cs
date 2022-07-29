@@ -9,17 +9,17 @@ public class Test : MonoBehaviour
         print(this.name);
     }
 
-    public void PrintName(string _input)
+    public void sPrintName(string _input)
     {
-        print(_input);
+        print("str "+_input);
     }
 
-    public void PrintName(int _input)
+    public void iPrintName(int _input)
     {
-        print(_input);
+        print("int " + _input);
     }
-    public void PrintName(float _input)
+    public void fPrintName(float _input)
     {
-        print(_input);
+        print("float " + _input);
     }
 }

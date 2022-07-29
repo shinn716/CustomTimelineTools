@@ -71,6 +71,7 @@ namespace Shinn.Timelinie
                 return;
 
             methodData = GetInvocationInfo(_type, _key);
+            //Debug.Log(_key + " " + _input);
 
             try
             {
@@ -82,13 +83,15 @@ namespace Shinn.Timelinie
                         methodData.methodInfo.Invoke(methodData.behaviour, null);
                         break;
                     case ParameterType.INT:
-                        methodData.methodInfo.Invoke(methodData.behaviour, new[] { _input });
+                        int.TryParse(_input.ToString(), out int iresult);
+                        methodData.methodInfo.Invoke(methodData.behaviour, new object[] { iresult });
                         break;
                     case ParameterType.FLOAT:
-                        methodData.methodInfo.Invoke(methodData.behaviour, new[] { _input });
+                        float.TryParse(_input.ToString(), out float fresult);
+                        methodData.methodInfo.Invoke(methodData.behaviour, new object[] { fresult });
                         break;
                     case ParameterType.STRING:
-                        methodData.methodInfo.Invoke(methodData.behaviour, new[] { _input });
+                        methodData.methodInfo.Invoke(methodData.behaviour, new object[] { _input });
                         break;
                 }
             }

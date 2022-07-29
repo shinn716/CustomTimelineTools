@@ -10,14 +10,16 @@ namespace Shinn.Timelinie
 {
     public class CustomEventPlayable : PlayableAsset
     {
-        public ExposedReference<GameObject> target;
-        public CustomEventClip.ParameterType type = CustomEventClip.ParameterType.NULL;
+        [SerializeField] public ExposedReference<GameObject> target;
+        [SerializeField] public CustomEventClip.ParameterType type = CustomEventClip.ParameterType.NULL;
 
-        public static List<string> myList;
-        [ListToPopup(typeof(CustomEventPlayable), "myList")]
-        public string Method = string.Empty;
-        public string input = string.Empty;
+        [SerializeField] private int IntInput = 0;
+        [SerializeField] private float FloatInput = 0;
+        [SerializeField] private string StringInput = string.Empty;
 
+        public List<string> MethodList { get; set; }
+        public string Method { get; set; } = string.Empty;
+        
         private List<string> eventHandlerListStart = new List<string> { };
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
@@ -28,17 +30,37 @@ namespace Shinn.Timelinie
 
             if (type == CustomEventClip.ParameterType.NULL)
             {
-                myList = new List<string>() { "" };
+                MethodList = new List<string>();
                 return playable;
             }
             else
             {
-                myList = FindPublicMethod(clip.target).Length == 0 ? new List<string>() { "" } : FindPublicMethod(clip.target).ToList();
-                clip.Init(type, Method, input);
+                MethodList = FindPublicMethod(clip.target).Length == 0 ? new List<string>() : FindPublicMethod(clip.target).ToList();
+                SetParameter(clip, type, Method);
                 return playable;
             }
         }
 
+        private void SetParameter(CustomEventClip _clip, CustomEventClip.ParameterType _type, string _method)
+        {
+            switch (_type)
+            {
+                case CustomEventClip.ParameterType.NULL:
+                    break;
+                case CustomEventClip.ParameterType.VOID:
+                    _clip.Init(type, Method, "");
+                    break;
+                case CustomEventClip.ParameterType.INT:
+                    _clip.Init(type, Method, IntInput);
+                    break;
+                case CustomEventClip.ParameterType.FLOAT:
+                    _clip.Init(type, Method, FloatInput);
+                    break;
+                case CustomEventClip.ParameterType.STRING:
+                    _clip.Init(type, Method, StringInput);
+                    break;
+            }
+        }
         private string[] FindPublicMethod(GameObject _go)
         {
             var _methods = _go.GetComponents<Behaviour>();
@@ -53,7 +75,7 @@ namespace Shinn.Timelinie
                             return (x.ReturnType == typeof(void)) && (x.GetParameters().Length == 1) &&
                                    (x.GetParameters()[0].ParameterType == typeof(int));
                         }
-                        else if (type == CustomEventClip.ParameterType.INT)
+                        else if (type == CustomEventClip.ParameterType.FLOAT)
                         {
                             return (x.ReturnType == typeof(void)) && (x.GetParameters().Length == 1) &&
                                    (x.GetParameters()[0].ParameterType == typeof(float));
