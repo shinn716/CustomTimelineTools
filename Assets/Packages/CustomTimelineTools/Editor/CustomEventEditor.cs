@@ -1,4 +1,5 @@
 using Shinn.Timelinie;
+using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(CustomEventPlayable))]
@@ -15,7 +16,7 @@ public class CustomEventEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("type"));
 
         string[] options = myScript.MethodList.ToArray();
-        selected = EditorGUILayout.Popup("Label", selected, options);
+        selected = EditorGUILayout.Popup("Method", selected, options);
 
         switch (myScript.type)
         {
