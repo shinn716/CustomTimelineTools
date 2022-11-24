@@ -11,6 +11,7 @@ public class CustomEventEditor : Editor
     public override void OnInspectorGUI()
     {
         myScript = (CustomEventPlayable)target;
+        selected = myScript.selected;
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("target"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("type"));

@@ -17,8 +17,10 @@ namespace Shinn.Timelinie
         [SerializeField] private float FloatInput = 0;
         [SerializeField] private string StringInput = string.Empty;
 
+        public int selected { get; set; } = 0;
         public List<string> MethodList { get; set; }
         public string Method { get; set; } = string.Empty;
+
         
         private List<string> eventHandlerListStart = new List<string> { };
 
