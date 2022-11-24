@@ -429,7 +429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5791352817534964279, guid: 8fc3e320fad8cdf49816efc6514de2a3, type: 3}
       propertyPath: stringEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PrintName
+      value: sPrintName
       objectReference: {fileID: 0}
     - target: {fileID: 5791352817534964279, guid: 8fc3e320fad8cdf49816efc6514de2a3, type: 3}
       propertyPath: stringEvents.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
