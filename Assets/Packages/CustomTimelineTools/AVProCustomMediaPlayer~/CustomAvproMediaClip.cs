@@ -10,21 +10,29 @@ namespace Shinn.Timelinie
     {
         public MediaPlayer mediaPlayer { get; set; }
         public MediaPlayer.FileLocation fileLocation { get; set; }
-        public string mediaUrl { get; set; }
+        public string path { get; set; }
         public bool loop { get; set; } = false;
+        public float playbackRate { get; set; } = 1f;
+
 
         private bool startOnce = false;
 
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
+            if (!Application.isPlaying)
+                return;
+
             if (mediaPlayer != null)
             {
                 if (startOnce)
                     return;
+
                 startOnce = true;
 
-                mediaPlayer.OpenVideoFromFile(fileLocation, mediaUrl, loop);
-                mediaPlayer.Play();
+                mediaPlayer.OpenVideoFromFile(fileLocation, path);
+                mediaPlayer.Control.SetLooping(loop);
+                mediaPlayer.Control.SetPlaybackRate(playbackRate);
+                mediaPlayer.Control.Play();
             }
         }
 
@@ -32,9 +40,7 @@ namespace Shinn.Timelinie
         public override void OnBehaviourPause(Playable playable, FrameData info)
         {
             if (!Application.isPlaying)
-            {
                 return;
-            }
 
             var duration = playable.GetDuration();
             var time = playable.GetTime();
