@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 
 namespace Shinn.Timelinie
 {
-    public class CustomTextControlPlayable : PlayableAsset
+    public class CustomTextPlayable : PlayableAsset
     {
         public ExposedReference<Text> targetTxt;
          

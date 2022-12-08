@@ -16,6 +16,9 @@ public class CustomEventEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("target"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("type"));
 
+        if (myScript.MethodList == null)
+            return;
+
         string[] options = myScript.MethodList.ToArray();
         selected = EditorGUILayout.Popup("Method", selected, options);
 
